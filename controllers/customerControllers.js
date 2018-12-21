@@ -14,7 +14,7 @@ app.get('/checkstatus/:IDTracking', function (req, res) {
         _id: idTracking
     }, (err, Customerdocs) => {
         if (!err) {
-            Customer.count({
+            Customer.countDocuments({
                 _id: idTracking
             }, function (err, count) {
                 if (count > 0) {

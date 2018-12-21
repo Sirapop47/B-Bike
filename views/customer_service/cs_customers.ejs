@@ -6,6 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/public/css/theme.css" type="text/css">
+    <link rel="stylesheet" href="/public/css/modal.css" type="text/css">
+    <style>
+        /* Custom dropdown */
+        .custom-dropdown {
+          position: relative;
+          display: inline-block;
+          vertical-align: middle;
+          margin: 10px; /* demo only */
+        }
+    
+        .custom-dropdown select {
+          background-color: #a0a0a078;
+          color: #fff;
+          font-size: inherit;
+          padding: .5em;
+          padding-right: 2.5em;	
+          border: 0;
+          margin: 0;
+          border-radius: 3px;
+          text-indent: 0.01px;
+          text-overflow: '';
+          -webkit-appearance: button; /* hide default arrow in chrome OSX */
+        }
+    
+        .custom-dropdown::before,
+        .custom-dropdown::after {
+          content: "";
+          position: absolute;
+          pointer-events: none;
+        }
+    
+        .custom-dropdown::after { /*  Custom dropdown arrow */
+          content: "\25BC";
+          height: 1em;
+          font-size: .625em;
+          line-height: 1;
+          right: 1.2em;
+          top: 50%;
+          margin-top: -.5em;
+        }
+    
+        .custom-dropdown::before { /*  Custom dropdown arrow cover */
+          width: 2em;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          border-radius: 0 3px 3px 0;
+        }
+    
+        .custom-dropdown select[disabled] {
+          color: rgba(0,0,0,.3);
+        }
+    
+        .custom-dropdown select[disabled]::after {
+          color: rgba(0,0,0,.1);
+        }
+    
+        .custom-dropdown::before {
+          background-color: rgba(0,0,0,.15);
+        }
+    
+        .custom-dropdown::after {
+          color: rgba(0,0,0,.4);
+        }
+        </style>
 
 
     <title>BBike-ServiceCustomer</title>
@@ -15,6 +80,72 @@
     <% include ../customer_service/partial/navbar %>
     <div class="py-5 text-center align-items-center d-flex" style="background-image: linear-gradient(to left bottom, rgba(189, 195, 199, .75), rgba(44, 62, 80, .75)); background-size: 100%;">
         <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-right">
+
+                    <% if (setdata == "all") { %>
+                    <span class="custom-dropdown">
+                        <select onchange="location = this.value;">
+                            <option value="/CScustomer/all/1">ทั้งหมด</option>
+                            <option value="/CScustomer/waiting/1">รอดำเนินการ</option>
+                            <option value="/CScustomer/working/1">กำลังดำเนินงาน</option>
+                            <option value="/CScustomer/finish/1">เสร็จสิ้นการดำเนินงาน</option>
+                            <option value="/CScustomer/cancel/1">ยกเลิกการสั่งงาน</option>
+                        </select>
+                    </span>
+
+                    <% } else if (setdata == "waiting") { %>
+                    <span class="custom-dropdown">
+                        <select onchange="location = this.value;">
+                            <option value="/CScustomer/waiting/1">รอดำเนินการ</option>
+                            <option value="/CScustomer/all/1">ทั้งหมด</option>
+                            <option value="/CScustomer/working/1">กำลังดำเนินงาน</option>
+                            <option value="/CScustomer/finish/1">เสร็จสิ้นการดำเนินงาน</option>
+                            <option value="/CScustomer/cancel/1">ยกเลิกการสั่งงาน</option>
+
+                        </select>
+                    </span>
+
+                    <% } else if (setdata == "working") { %>
+                    <span class="custom-dropdown">
+                        <select onchange="location = this.value;">
+                            <option value="/CScustomer/working/1">กำลังดำเนินงาน</option>
+                            <option value="/CScustomer/all/1">ทั้งหมด</option>
+                            <option value="/CScustomer/waiting/1">รอดำเนินการ</option>
+                            <option value="/CScustomer/finish/1">เสร็จสิ้นการดำเนินงาน</option>
+                            <option value="/CScustomer/cancel/1">ยกเลิกการสั่งงาน</option>
+
+                        </select>
+                    </span>
+
+
+                    <% } else if (setdata == "finish") { %>
+                    <span class="custom-dropdown">
+                        <select onchange="location = this.value;">
+                            <option value="/CScustomer/finish/1">เสร็จสิ้นการดำเนินงาน</option>
+                            <option value="/CScustomer/all/1">ทั้งหมด</option>
+                            <option value="/CScustomer/waiting/1">รอดำเนินการ</option>
+                            <option value="/CScustomer/working/1">กำลังดำเนินงาน</option>
+                            <option value="/CScustomer/cancel/1">ยกเลิกการสั่งงาน</option>
+                        </select>
+                    </span>
+
+                    <% } else if (setdata == "cancel") { %>
+                    <span class="custom-dropdown">
+                        <select onchange="location = this.value;">
+                            <option value="/CScustomer/cancel/1">ยกเลิกการสั่งงาน</option>
+                            <option value="/CScustomer/all/1">ทั้งหมด</option>
+                            <option value="/CScustomer/waiting/1">รอดำเนินการ</option>
+                            <option value="/CScustomer/working/1">กำลังดำเนินงาน</option>
+                            <option value="/CScustomer/finish/1">เสร็จสิ้นการดำเนินงาน</option>
+
+
+                        </select>
+                    </span>
+
+                    <% } %>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-8 mx-auto">
@@ -25,10 +156,19 @@
                                     ชื่อ:
                                     <%= list[i].Name %>, เบอร์โทรศัพท์:
                                     <%= list[i].Phone %></b></h5>
-                            <p class="card-text">
+                            <% if (list[i].Status == "ยกเลิกการสั่งงาน") { %>
+                            <p class="card-text text-danger">
                                 สถานะ:
                                 <%= list[i].Status %>
                             </p>
+
+                            <% } else { %>
+                            <p class="card-text text-success">
+                                สถานะ:
+                                <%= list[i].Status %>
+                            </p>
+                            <% } %>
+
                             <hr style="margin-bottom: 10px; margin-top: 10px;">
                             <div class="row">
 
@@ -69,8 +209,57 @@
                                     </p>
                                 </div>
                             </div>
+                            <% if (list[i].Status == "เสร็จสิ้นการดำเนินงาน" || list[i].Status == "ยกเลิกการสั่งงาน") { %>
+                            <button class="btn text-danger btn-info modal-trigger" data-modal="modal-name" onclick="sendData('<%= list[i].Name %>', '<%= list[i].Status %>', '<%= list[i]._id %>', '<%= list[i].IDEmployee %>')"
+                                disabled>
+                                ยกเลิกการสั่งงาน</button>
+                            <% } else { %>
+                            <button class="btn btn-outline-danger modal-trigger" data-modal="modal-name" onclick="sendData('<%= list[i].Name %>', '<%= list[i].Status %>', '<%= list[i]._id %>', '<%= list[i].IDEmployee %>')">
+                                ยกเลิกการสั่งงาน</button>
+                            <% } %>
 
 
+
+                            <!-- Modal -->
+                            <div class="modal" id="modal-name">
+                                <div class="modal-sandbox"></div>
+                                <div class="modal-box">
+                                    <form action="" method="POST">
+                                        <div class="modal-header" style="background: #de2222d4">
+                                            <div class="close-modal"></div>
+                                            <h1>ยกเลิกการสั่งงานของลูกค้า</h1>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    ชื่อลูกค้า:
+                                                    <label id="Name_">
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    สถานะ:
+                                                    <label id="Status_">
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    รหัสพนักงานที่ให้บริการ:
+                                                    <label id="IDEmployee_P">
+                                                    </label>
+
+                                                </div>
+                                                <input type="hidden" name="IDCustomer_" id="IDCustomer_">
+                                                <input type="hidden" name="IDEmployee_" id="IDEmployee_">
+                                            </div>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">ยืนยัน</button>
+                                            <button type="button" class="btn btn-success close-modal">ปิด</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
 
 
 
@@ -92,7 +281,7 @@
                         <% }
                                 else 
                                 { %>
-                        <li><a class="page-link" href="/CScustomer/1">First</a></li>
+                        <li><a class="page-link" href="/CScustomer/<%= setdata %>/1">First</a></li>
                         <% } %>
 
                         <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
@@ -108,7 +297,7 @@
                         <li class="page-item active"><a class="page-link">
                                 <%= i %></a></li>
                         <% } else { %>
-                        <li><a class="page-link" href="/CScustomer/<%= i %>">
+                        <li><a class="page-link" href="/CScustomer/<%= setdata %>/<%= i %>">
                                 <%= i %></a></li>
                         <% } %>
                         <% if (i == Number(current) + 4 && i < pages) { %>
@@ -118,7 +307,7 @@
                         <% if (current == pages) { %>
                         <li class="page-item"><a class="page-link">Last</a></li>
                         <% } else { %>
-                        <li><a class="page-link" href="/CScustomer/<%= pages %>">Last</a></li>
+                        <li><a class="page-link" href="/CScustomer/<%= setdata %>/<%= pages %>">Last</a></li>
                         <% } %>
                     </ul>
                     <% } %>
@@ -128,6 +317,37 @@
         </div>
     </div>
     <% include ../customer_service/partial/footer %>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(".modal-trigger").click(function (e) {
+            e.preventDefault();
+            dataModal = $(this).attr("data-modal");
+            $("#" + dataModal).css({
+                "display": "block"
+            });
+
+        });
+
+
+
+        $(".close-modal, .modal-sandbox").click(function () {
+            $(".modal").css({
+                "display": "none"
+            });
+        });
+
+        function sendData(Name, Status, IDCustomer, IDEmployee) {
+            document.getElementById("Name_").innerHTML = Name
+            document.getElementById("Status_").innerHTML = Status
+            document.getElementById("IDEmployee_P").innerHTML = IDEmployee
+            document.getElementById("IDCustomer_").defaultValue = IDCustomer
+            document.getElementById("IDEmployee_").defaultValue = IDEmployee
+
+
+
+        }
+    </script>
 </body>
 
 </html>
