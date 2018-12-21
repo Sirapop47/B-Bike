@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/public/css/theme.css" type="text/css">
+    <link rel="stylesheet" href="/public/css/modal.css" type="text/css">
+    <title>ฺBBike-Employee</title>
+</head>
+
+<body>
+    <% include ../customer_service/partial/navbar %>
+    <div class="py-5 text-center align-items-center d-flex" style="background-image: linear-gradient(to left bottom, rgba(189, 195, 199, .75), rgba(44, 62, 80, .75)); background-size: 100%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-right">
+
+                    <% if (setdata == "free") { %>
+                    <a class="btn btn-primary" id="setData" href="/CSEmployee/all/1">แสดงทั้งหมด</a>
+                    <% } else { %>
+                    <a class="btn btn-primary" id="setData" href="/CSEmployee/free/1">แสดงเฉพาะ Driver ที่ว่าง</a>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6 mx-auto">
+                    <% for (var i = 0; i < data.length; i+=2) { %>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <b>
+                                    ชื่อ:
+                                    <%= data[i].Name %>,
+                                    เบอร์โทรศัพท์:
+                                    <%= data[i].Phone %>
+                                </b>
+                            </h5>
+                            <p class="card-text">
+                                ไอดีพนักงาน:
+                                <%= data[i].IDEmployee %>
+                            </p>
+                            <hr style="margin-bottom: 10px; margin-top: 10px;">
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <p class="card-text">
+                                        รหัสงาน:
+                                        <%= data[i].IDWork %>
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text">
+                                        สถานะของงาน:
+                                        <%= data[i].StatusWork %>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- <% if (data[i].IDWork == "ว่าง") { %>
+                            <button class="btn btn-outline-primary modal-trigger" id="setData" data-modal="modal-name">มอบหมายงาน</button>
+                            <% } else { %>
+                            <button class="btn btn-dark" id="setData" disabled>มอบหมายงาน</button>
+                            <% } %> -->
+
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <div class="col-md-6 mx-auto">
+                    <% for (var j = 1; j < data.length; j+=2) { %>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <b>
+                                    ชื่อ:
+                                    <%= data[j].Name %>,
+                                    เบอร์โทรศัพท์:
+                                    <%= data[j].Phone %>
+                                </b>
+                            </h5>
+                            <p class="card-text">
+                                ไอดีพนักงาน:
+                                <%= data[j].IDEmployee %>
+                            </p>
+                            <hr style="margin-bottom: 10px; margin-top: 10px;">
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <p class="card-text">
+                                        รหัสงาน:
+                                        <%= data[j].IDWork %>
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text">
+                                        สถานะของงาน:
+                                        <%= data[j].StatusWork %>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- <% if (data[j].IDWork == "ว่าง") { %>
+                            <button class="btn btn-outline-primary modal-trigger" id="setData" data-modal="modal-name">มอบหมายงาน</button>
+
+                            <% } else { %>
+                            <button class="btn btn-dark" id="setData" disabled>มอบหมายงาน</button>
+                            <% } %> -->
+
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <% if (pages > 0) { %>
+                    <ul class="pagination w-25 mx-auto">
+                        <% if (current == 1) 
+                                { %>
+                        <li class="page-item"><a class="page-link">First</a></li>
+                        <% }
+                                else 
+                                { %>
+                        <li><a class="page-link" href="/CSEmployee/<%= setdata %>/1">First</a></li>
+                        <% } %>
+
+                        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+
+                        <% if (i !== 1) { %>
+                        <li class="page-item"><a class="page-link">...</a></li>
+                        <% } %>
+
+                        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+
+                        <% if (i == current) { %>
+
+                        <li class="page-item active"><a class="page-link">
+                                <%= i %></a></li>
+                        <% } else { %>
+                        <li><a class="page-link" href="/CSEmployee/<%= setdata %>/<%= i %>">
+                                <%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                        <li class="page-item"><a class="page-link">...</a></li>
+                        <% } %>
+                        <% } %>
+                        <% if (current == pages) { %>
+                        <li class="page-item"><a class="page-link">Last</a></li>
+                        <% } else { %>
+                        <li><a class="page-link" href="/CSEmployee/<%= setdata %>/<%= pages %>">Last</a></li>
+                        <% } %>
+                    </ul>
+                    <% } %>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    
+
+    <!-- Modal -->
+    <div class="modal" id="modal-name">
+        <div class="modal-sandbox"></div>
+        <div class="modal-box">
+            <div class="modal-header">
+                <div class="close-modal">&#10006;</div>
+                <h1>รายการการสั่งงาน</h1>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic soluta saepe, atque, iure quidem
+                    maiores non dolores, fuga eaque voluptatibus corporis accusantium quas. Eligendi velit eum fugiat
+                    eius? Distinctio reiciendis sint error, repellat ut soluta doloremque, accusamus vitae placeat?</p>
+                <p>Laboriosam voluptas, iure rem provident laborum culpa atque fugit inventore sit. Corrupti dolore
+                    architecto inventore officia, odit totam voluptatem laboriosam tempore reiciendis, et neque,
+                    consequuntur. Non, tenetur? Tempore reprehenderit tenetur nemo asperiores alias commodi assumenda
+                    architecto minima numquam repellendus debitis nulla, rerum officia itaque, sunt nihil sequi quod
+                    perspiciatis, animi quas voluptates velit aperiam voluptatem.</p>
+                <br />
+                <button class="close-modal">Close!</button>
+            </div>
+        </div>
+    </div>
+    <% include ../customer_service/partial/footer %>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(".modal-trigger").click(function (e) {
+            e.preventDefault();
+            dataModal = $(this).attr("data-modal");
+            $("#" + dataModal).css({
+                "display": "block"
+            });
+        });
+
+        $(".close-modal, .modal-sandbox").click(function () {
+            $(".modal").css({
+                "display": "none"
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/public/css/theme.css" type="text/css">
+
+
+    <title>BBike-ServiceCustomer</title>
+</head>
+
+<body>
+    <% include ../customer_service/partial/navbar %>
+    <div class="py-5 text-center align-items-center d-flex" style="background-image: linear-gradient(to left bottom, rgba(189, 195, 199, .75), rgba(44, 62, 80, .75)); background-size: 100%;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <% for (var i = 0; i < list.length; i++) { %>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <h5 class="card-title"><b>
+                                    ชื่อ:
+                                    <%= list[i].Name %>, เบอร์โทรศัพท์:
+                                    <%= list[i].Phone %></b></h5>
+                            <p class="card-text">
+                                สถานะ:
+                                <%= list[i].Status %>
+                            </p>
+                            <hr style="margin-bottom: 10px; margin-top: 10px;">
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <p class="card-text">
+                                        บริการที่เลือก:
+                                        <%= list[i].Service %>
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text">
+                                        ราคา:
+                                        <%= list[i].Cost %>
+                                    </p>
+                                </div>
+                            </div>
+                            <hr style="margin-bottom: 10px; margin-top: 10px;">
+                            <p class="card-text">
+                                สถานที่ต้นทาง:
+                                <%= list[i].PlaceOrigin %>
+                            </p>
+                            <p class="card-text">
+                                สถานที่ปลายทาง:
+                                <%= list[i].PlaceDestination %>
+                            </p>
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <p class="card-text">
+                                        ระยะทาง:
+                                        <%= list[i].Distance %>
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text">
+                                        รหัสพนักงานที่ให้บริการ:
+                                        <%= list[i].IDEmployee %>
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <% if (pages > 0) { %>
+                    <ul class="pagination w-25 mx-auto">
+                        <% if (current == 1) 
+                                { %>
+                        <li class="page-item"><a class="page-link">First</a></li>
+                        <% }
+                                else 
+                                { %>
+                        <li><a class="page-link" href="/CScustomer/1">First</a></li>
+                        <% } %>
+
+                        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+
+                        <% if (i !== 1) { %>
+                        <li class="page-item"><a class="page-link">...</a></li>
+                        <% } %>
+
+                        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+
+                        <% if (i == current) { %>
+
+                        <li class="page-item active"><a class="page-link">
+                                <%= i %></a></li>
+                        <% } else { %>
+                        <li><a class="page-link" href="/CScustomer/<%= i %>">
+                                <%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                        <li class="page-item"><a class="page-link">...</a></li>
+                        <% } %>
+                        <% } %>
+                        <% if (current == pages) { %>
+                        <li class="page-item"><a class="page-link">Last</a></li>
+                        <% } else { %>
+                        <li><a class="page-link" href="/CScustomer/<%= pages %>">Last</a></li>
+                        <% } %>
+                    </ul>
+                    <% } %>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <% include ../customer_service/partial/footer %>
+</body>
+
+</html>

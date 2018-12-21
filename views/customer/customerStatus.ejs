@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="/public/css/theme.css" type="text/css">
+    <title>ฺBBike</title>
+</head>
+
+<body>
+    <div class="text-center text-md-right d-flex align-items-center py-5" style="	background-image: url(/public/image/bangkok.jpg);	
+        background-position: right bottom;	background-size: cover;	background-repeat: repeat;	background-attachment: fixed;	min-height: 100%;">
+        <div class="container" style="background-color: hsla(0, 100%, 99%, 0.85); ">
+
+            <div class="row my-5 mx-3">
+
+                <div class="col-md-6">
+
+                    <h4 class="display-5">คุณ
+                        <%= dataCustomer[0].Name %>
+                    </h4>
+                    <h5 class="display-5">รายการของคุณ
+                    </h5>
+                    <p>
+                        บริการ:
+                        <%= dataCustomer[0].Service %>
+                    </p>
+                    <p>
+                        ราคา:
+                        <%= dataCustomer[0].Cost %>
+                    </p>
+                    <p>
+                        สถานที่ต้นทาง:
+                        <%= dataCustomer[0].PlaceOrigin %>
+                    </p>
+                    <p>
+                        สถานที่ปลายทาง:
+                        <%= dataCustomer[0].PlaceDestination %>
+                    </p>
+                    <p>
+                        ระยะทาง:
+                        <%= dataCustomer[0].Distance %>
+                    </p>
+
+
+                    <hr>
+
+
+                </div>
+                <div class="col-md-6">
+                    <p class="text-right">
+                        รหัสในการบริการ:
+                        <%= dataCustomer[0]._id %>
+                    </p>
+                    <hr>
+                    <p>
+                        สถานะ:
+                        <%= dataCustomer[0].Status %>
+                        <% if (dataCustomer[0].IDEmployee == "-") { %>
+                        <p class="text-primary">
+                            <b>-</b>
+                            
+                        </p>
+                        <% } else { %>
+                        <p class="text-primary">
+                            <b>-</b>
+                            <%= dataEmployee[0].StatusWork %>
+                        </p>
+                        <% } %>
+
+
+                    </p>
+                    <a class="btn btn-sm btn-outline-primary text-dark" href="/">กลับสู่หน้าหลัก</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

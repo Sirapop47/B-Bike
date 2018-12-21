@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>BBike</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+
+    <link rel="stylesheet" type="text/css" href="css/normalize-map.css" />
+
+    <link rel="stylesheet" href="css/theme.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/set2-theme-map.css" />
+    <link rel="stylesheet" type="text/css" href="css/multi-step-form.css" />
+    <link rel="stylesheet" type="text/css" href="css/chackbox.css" />
+
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+          height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="pb-0">
+        <div class="container-fluid p-0">
+            <div id="map" style="height:400px"></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="mx-auto pt-2 col-md-9">
+                    <form id="msform" action="/map" ng-app="" method="POST">
+                        <!-- progressbar -->
+                        <ul id="progressbar">
+                            <li class="active">ระบุสถานที่</li>
+                            <li>เลือกบริการ</li>
+                            <li>สรุปการสั่งงาน</li>
+                        </ul>
+                        <!-- fieldsets -->
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-md-6 mx-auto">
+                                    <span class="input input--chisato">
+                                        <input class="input__field input__field--chisato" id="origin-input" type="text"
+                                            placeholder="" />
+                                        <input id="origin" name="origin" required="" type="hidden" />
+                                        <label class="input__label input__label--chisato" for="origin-input" style="font-size: 15px">
+                                            <span class="input__label-content input__label-content--chisato"
+                                                data-content="ระบุสถานที่ต้นทาง">ระบุสถานที่ต้นทาง</span>
+                                        </label>
+                                    </span>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="input input--chisato">
+                                        <input class="input__field input__field--chisato" id="destination-input" type="text"
+                                            placeholder="" />
+                                        <label class="input__label input__label--chisato" for="destination-input">
+                                            <span class="input__label-content input__label-content--chisato"
+                                                data-content="ระบุสถานที่ปลายทาง">ระบุสถานที่ปลายทาง</span>
+                                        </label>
+                                    </span>
+                                </div>
+                                <hr>
+                                <div class="col-md-6">
+                                    <hr>
+                                    <span class="input input--chisato">
+                                        <input class="input__field input__field--chisato" type="text" id="customer_contact"
+                                            ng-model="customer_contact" />
+                                        <label class="input__label input__label--chisato" for="input-13">
+                                            <span class="input__label-content input__label-content--chisato"
+                                                data-content="ชื่อผู้ติดต่อ">ชื่อผู้ติดต่อ</span>
+                                        </label>
+                                    </span>
+                                </div>
+                                <div class="col-md-6">
+                                    <hr>
+                                    <span class="input input--chisato">
+                                        <input class="input__field input__field--chisato" type="tel" id="customer_phone_number"
+                                            ng-model="customer_phone_number" />
+                                        <label class="input__label input__label--chisato" for="input-13">
+                                            <span class="input__label-content input__label-content--chisato"
+                                                data-content="เบอร์ติดต่อ">เบอร์ติดต่อ</span>
+                                        </label>
+                                    </span>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <input type="button" name="next" class="next btn action-button btn-outline-primary" value="ถัดไป" />
+                        </fieldset>
+
+                        <fieldset>
+                            <div class="row justify-content-center pb-2">
+                                <div class="col-md-3 p-1" style="box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);">
+
+                                    <div class="inputGroup">
+                                        <input id="radio1" name="radio" type="radio" onclick="checkradio();" />
+                                        <label for="radio1" style="padding: 20px 20px;"></label>
+                                    </div>
+
+                                    <div class="card-body" style="">
+                                        <img class="img-fluid d-block mb-2 mx-auto rounded" src="image/icon/delivery-2.png"
+                                            width="70" alt="Card image cap">
+                                        <h5>ส่งพัสดุด่วน</h5>
+                                        <p style="font-size: 10px; margin-bottom:0px">(ขนาดไม่เกิน 20 กก. หรือ 50x50x80
+                                            ซม.)</p>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-3 p-1" style="box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);">
+
+                                    <div class="inputGroup">
+                                        <input id="radio2" name="radio" type="radio" onclick="checkradio();" />
+                                        <label for="radio2" style="padding: 20px 20px;"></label>
+                                    </div>
+
+                                    <div class="card-body" style="">
+                                        <img class="img-fluid d-block mb-2 mx-auto rounded" src="image/icon/meals.png"
+                                            width="70">
+                                        <h5>ส่งอาหารซื้ออาหาร</h5>
+                                        <p style="font-size: 10px; margin-bottom:0px">(ไม่รับเค้กทุกประเภท)</p>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-3 p-1" style=" box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);">
+
+                                    <div class="inputGroup">
+                                        <input id="radio3" name="radio" type="radio" onclick="checkradio();" />
+                                        <label for="radio3" style="padding: 20px 20px;"></label>
+                                    </div>
+
+                                    <div class="card-body" style="">
+                                        <img class="img-fluid d-block mb-2 mx-auto rounded" src="image/icon/folder.png"
+                                            width="70">
+                                        <h5>ส่งเอกสาร</h5>
+                                        <!-- <p style="font-size: 10px; margin-bottom:0px"></p> -->
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-3 p-1" style=" box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);">
+
+                                        <div class="inputGroup">
+                                            <input id="radio4" name="radio" type="radio" onclick="checkradio();" />
+                                            <label for="radio4" style="padding: 20px 20px;"></label>
+                                        </div>
+    
+                                        <div class="card-body" style="">
+                                            <img class="img-fluid d-block mb-2 mx-auto rounded" src="image/icon/shopping.png"
+                                                width="70">
+                                            <h5>ฝากซื้อฝากส่ง</h5>
+                                            <!-- <p style="font-size: 10px; margin-bottom:0px"></p> -->
+                                        </div>
+    
+    
+                                    </div>
+                            </div>
+
+
+
+                            <input type="button" name="previous" class="previous btn action-button btn-outline-primary"
+                                value="ย้อนกลับ" />
+                            <input type="button" name="next" class="next btn action-button btn-outline-primary" value="ถัดไป" />
+                        </fieldset>
+
+                        <fieldset>
+                            <h2 class="fs-title">สรุปการสั่งงาน</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <h4 class="fs-subtitle">สถานที่ต้นทาง: <p id="getorigin" style="font-size: 12px; margin-bottom:0px"></p>
+                                    </h4>
+                                    <input type="hidden" name="placeorigin" id="placeorigin">
+
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="fs-subtitle">สถานที่ปลายทาง: <p id="getdestination" style="font-size: 12px; margin-bottom:0px"></p>
+                                    </h4>
+                                    <input type="hidden" name="placedestination" id="placedestination">
+                                </div>
+                            </div>
+                            <hr style="margin-top: 1rem; margin-bottom: 1rem">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4 class="fs-subtitle">ชื่อผู้ติดต่อ:
+                                        <p style="font-size: 12px; margin-bottom:0px" id="name_customers">{{
+                                            customer_contact }}</p>
+                                    </h4>
+                                    <input type="hidden" name="namecustomers" id="namecustomers" value="1234">
+
+                                </div>
+                                <div class="col-md-4">
+                                    <h4 class="fs-subtitle">เบอร์ติดต่อ:
+                                        <p style="font-size: 12px; margin-bottom:0px" id="phone_customers">{{
+                                            customer_phone_number }}</p>
+                                    </h4>
+                                    <input type="hidden" name="phonecustomers" id="phonecustomers">
+                                </div>
+                                <div class="col-md-4">
+                                    <h4 class="fs-subtitle">บริการที่เลือก:
+                                        <p id="service_select" style="font-size: 12px; margin-bottom:0px"></p>
+                                        <p id="service_annotation" style="font-size: 10px; margin-bottom:0px"></p>
+                                    </h4>
+                                    <input type="hidden" name="serviceselect" id="serviceselect">
+                                </div>
+                            </div>
+                            <hr style="margin-top: 1rem; margin-bottom: 1rem">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="fs-subtitle">ค่าบริการ:
+                                        <p id="service_cost" style="font-size: 12px; margin-bottom:0px"></p>
+                                    </h4>
+                                    <input type="hidden" name="servicecost" id="servicecost">
+
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="fs-subtitle">ระยะทางทั้งหมด:
+                                        <p id="distanceinkilo" style="font-size: 12px; margin-bottom:0px"></p>
+                                    </h4>
+                                    <input type="hidden" name="distance" id="distance">
+                                </div>
+                            </div>
+
+
+                            <input type="button" name="previous" class="previous btn action-button btn-outline-primary"
+                                value="ย้อนกลับ" />
+                            <button type="submit" name="submit" class="submit btn action-button btn-outline-primary"
+                                onclick="set_data()" style="width:170px">ยืนยันการทำรายการ</button>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div><!-- row -->
+        </div>
+    </div>
+
+
+
+    <script>
+        // This example requires the Places library. Include the libraries=places
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                mapTypeControl: false,
+                center: {
+                    lat: 13.847860,
+                    lng: 100.604274
+                },
+                zoom: 13,
+                disableDefaultUI: true
+            });
+
+            new AutocompleteDirectionsHandler(map);
+        }
+
+        /**
+         * @constructor
+         */
+        function AutocompleteDirectionsHandler(map) {
+            this.map = map;
+            this.originPlaceId = null;
+            this.destinationPlaceId = null;
+            this.travelMode = 'DRIVING';
+            var originInput = document.getElementById('origin-input');
+            var destinationInput = document.getElementById('destination-input');
+            this.directionsService = new google.maps.DirectionsService;
+            this.directionsDisplay = new google.maps.DirectionsRenderer;
+            this.directionsDisplay.setMap(map);
+
+            var originAutocomplete = new google.maps.places.Autocomplete(
+                originInput, {
+                    placeIdOnly: true
+                });
+            var destinationAutocomplete = new google.maps.places.Autocomplete(
+                destinationInput, {
+                    placeIdOnly: true
+                });
+
+
+            this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+            this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+            document.getElementById("msform").onkeypress = function (e) {
+                var key = e.charCode || e.keyCode || 0;
+                if (key == 13) {
+                    var placeorigin = document.getElementById("getorigin").innerHTML
+                    var placedestination = document.getElementById("getdestination").innerHTML
+                    var namecustomers = document.getElementById("name_customers").innerHTML
+                    var phonecustomers = document.getElementById("phone_customers").innerHTML
+                    var serviceselect = document.getElementById("service_select").innerHTML
+                    var servicecost = document.getElementById("service_cost").innerHTML
+                    var distance = document.getElementById("distanceinkilo").innerHTML
+                    //if (placeorigin == ''|| placedestination == '' || namecustomers == ''|| phonecustomers == ''|| serviceselect == ''|| servicecost == ''|| distance == '' ){
+
+                    if (placeorigin == '' || placedestination == '' || namecustomers == '' || phonecustomers == '' ||
+                        serviceselect == '') {
+                        alert("กรุณากรอกข้อมูลให้ครบ");
+                        e.preventDefault();
+                    } else {
+
+                    }
+
+                }
+            }
+
+
+
+            //this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
+            //this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+            //this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
+        }
+
+        // Sets a listener on a radio button to change the filter type on Places
+
+
+        AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function (autocomplete, mode) {
+            var me = this;
+            autocomplete.bindTo('bounds', this.map);
+            autocomplete.addListener('place_changed', function () {
+                var place = autocomplete.getPlace();
+                if (!place.place_id) {
+                    window.alert("Please select an option from the dropdown list.");
+                    return;
+                }
+                if (mode === 'ORIG') {
+                    me.originPlaceId = place.place_id;
+
+                    var getoriginInput = document.getElementById('origin-input').value;
+                    document.getElementById("getorigin").innerHTML = getoriginInput;
+                    console.log(getoriginInput);
+                    console.log(place.place_id);
+                } else {
+                    me.destinationPlaceId = place.place_id;
+                    var getdestinationInput = document.getElementById('destination-input').value;
+                    document.getElementById("getdestination").innerHTML = getdestinationInput;
+                    console.log(getdestinationInput);
+                    console.log(place.place_id);
+                }
+                me.route();
+            });
+
+        };
+
+        AutocompleteDirectionsHandler.prototype.route = function () {
+            if (!this.originPlaceId || !this.destinationPlaceId) {
+                return;
+            }
+            var me = this;
+
+            this.directionsService.route({
+                origin: {
+                    'placeId': this.originPlaceId
+                },
+                destination: {
+                    'placeId': this.destinationPlaceId
+                },
+                travelMode: this.travelMode
+            }, function (response, status) {
+                if (status === 'OK') {
+                    me.directionsDisplay.setDirections(response);
+                    console.log('ok');
+                    calculateDistance();
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        };
+
+        // calculate distance
+        function calculateDistance() {
+            var getoriginInput = document.getElementById('origin-input').value;
+            var getdestinationInput = document.getElementById('destination-input').value;
+            var origin = getoriginInput;
+            var destination = getdestinationInput;
+            var service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix({
+                origins: [origin],
+                destinations: [destination],
+                travelMode: google.maps.TravelMode.DRIVING,
+                unitSystem: google.maps.UnitSystem.IMPERIAL,
+                avoidHighways: false,
+                avoidTolls: false
+            }, callback);
+        }
+        // get distance results
+        function callback(response, status) {
+            if (status != google.maps.DistanceMatrixStatus.OK) {
+                $('#result').html(err);
+            } else {
+                var origin = response.originAddresses[0];
+                var destination = response.destinationAddresses[0];
+                if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
+                    $('#result').html("Better get on a plane. There are no roads between " + origin + " and " +
+                        destination);
+                } else {
+                    var distance = response.rows[0].elements[0].distance;
+                    var duration = response.rows[0].elements[0].duration;
+                    console.log(response.rows[0].elements[0].distance);
+                    var distance_in_kilo = distance.value / 1000;
+                    console.log(distance_in_kilo);
+                    if (distance_in_kilo <= 0) {
+                        document.getElementById("service_cost").innerHTML = 46 + " บาท";
+                        document.getElementById("distanceinkilo").innerHTML = distance_in_kilo + " กิโลเมตร";
+                    } else if (distance_in_kilo < 30) {
+                        service_charge = 46 + (distance_in_kilo * 7.2);
+                        document.getElementById("service_cost").innerHTML = parseInt(service_charge) + " บาท";
+                        document.getElementById("distanceinkilo").innerHTML = distance_in_kilo + " กิโลเมตร";
+                        console.log(service_charge);
+                    } else if (distance_in_kilo > 30) {
+                        kilo1 = distance_in_kilo - 30;
+                        service_charge = 46 + (30 * 7.2) + (kilo1 * 14);
+                        document.getElementById("service_cost").innerHTML = parseInt(service_charge) + " บาท";
+                        document.getElementById("distanceinkilo").innerHTML = distance_in_kilo + " กิโลเมตร";
+                        console.log(parseInt(service_charge));
+                    }
+
+                }
+            }
+        }
+
+        function checkradio() {
+            var rates = document.getElementsByName('radio');
+            if (rates[0].checked) {
+                document.getElementById("service_select").innerHTML = 'ส่งพัสดุด่วน';
+                document.getElementById("service_annotation").innerHTML = '(ขนาดไม่เกิน 20 กก. หรือ 50x50x80 ซม.)';
+            } else if (rates[1].checked) {
+                document.getElementById("service_select").innerHTML = 'ส่งอาหารซื้ออาหาร';
+                document.getElementById("service_annotation").innerHTML = '(ไม่รับเค้กทุกประเภท)';
+            } else if (rates[2].checked) {
+                document.getElementById("service_select").innerHTML = 'ส่งเอกสาร';
+                document.getElementById("service_annotation").innerHTML = ' ';
+            } else if (rates[3].checked) {
+                document.getElementById("service_select").innerHTML = 'ฝากซื้อฝากส่ง';
+                document.getElementById("service_annotation").innerHTML = ' ';
+            }
+
+        }
+
+        function set_data() {
+
+
+            var placeorigin = document.getElementById("getorigin").innerHTML
+            var placedestination = document.getElementById("getdestination").innerHTML
+            var namecustomers = document.getElementById("name_customers").innerHTML
+            var phonecustomers = document.getElementById("phone_customers").innerHTML
+            var serviceselect = document.getElementById("service_select").innerHTML
+            var servicecost = document.getElementById("service_cost").innerHTML
+            var distance = document.getElementById("distanceinkilo").innerHTML
+            if (placeorigin == '' || placedestination == '' || namecustomers == '' || phonecustomers == '' ||
+                serviceselect == '') {
+                alert("กรุณากรอกข้อมูลให้ครบ");
+                e.preventDefault();
+            } else {
+                document.getElementById("placeorigin").defaultValue = placeorigin
+                document.getElementById("placedestination").defaultValue = placedestination
+                document.getElementById("namecustomers").defaultValue = namecustomers
+                document.getElementById("phonecustomers").defaultValue = phonecustomers
+                document.getElementById("serviceselect").defaultValue = serviceselect
+                document.getElementById("servicecost").defaultValue = servicecost
+                document.getElementById("distance").defaultValue = distance
+
+                document.getElementById("getorigin").innerHTML = ""
+                document.getElementById("getdestination").innerHTML = ""
+                document.getElementById("name_customers").innerHTML = ""
+                document.getElementById("phone_customers").innerHTML = ""
+                document.getElementById("service_select").innerHTML = ""
+                document.getElementById("service_cost").innerHTML = ""
+                document.getElementById("distanceinkilo").innerHTML = ""
+
+
+
+            }
+
+
+            console.log('set data')
+
+
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByImK2-XHVM_ci2bkhCQA8IizPP8eieCY&libraries=places&callback=initMap"
+        async defer></script>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    
+
+    <script src="js/multi-step-form.js"></script>
+    <script src="js/classie-map.js"></script>
+</body>
+
+
+</html>

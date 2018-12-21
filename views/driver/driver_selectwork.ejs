@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/public/css/theme.css" type="text/css">
+    <link rel="stylesheet" href="/public/css/modal.css" type="text/css">
+
+    <title>BBike-Driver</title>
+</head>
+
+<body>
+    <% include ../driver/partial/navbar %>
+    <div class="py-5 text-center align-items-center d-flex" style="background-image: linear-gradient(to left bottom, rgba(189, 195, 199, .75), rgba(44, 62, 80, .75)); background-size: 100%;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+
+
+                    
+                    <h3>ยินดีต้อนรับ:
+                        <%= dataEmployee[0].Name %>
+                    </h3>
+                   
+
+                    <hr>
+                    <% for (var i = 0; i < dataCustomer.length; i++) { %>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger"><b>
+                                    สถานะ:
+                                    <%= dataCustomer[i].Status %>
+                                </b></h5>
+                            <p class="card-text" id="nameandphone">
+                                ชื่อ:
+                                <%= dataCustomer[i].Name %>, เบอร์โทรศัพท์:
+                                <%= dataCustomer[i].Phone %>
+
+                            </p>
+                            <hr style="margin-bottom: 10px; margin-top: 10px;">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <p class="card-text">
+                                        บริการที่เลือก:
+                                        <%= dataCustomer[i].Service %>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="card-text">
+                                        ราคา:
+                                        <%= dataCustomer[i].Cost %>
+                                    </p>
+                                </div>
+                            </div>
+                            <hr style="margin-bottom: 10px; margin-top: 10px;">
+                            <p class="card-text">
+                                สถานที่ต้นทาง:
+                                <%= dataCustomer[i].PlaceOrigin %>
+                            </p>
+                            <p class="card-text">
+                                สถานที่ปลายทาง:
+                                <%= dataCustomer[i].PlaceDestination %>
+                            </p>
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <p class="card-text">
+                                        ระยะทาง:
+                                        <%= dataCustomer[i].Distance %>
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <p>
+                                        
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <button class="btn btn-outline-primary modal-trigger" data-modal="modal-name" onclick="sendData('<%= dataCustomer[i].Name %>', '<%= dataCustomer[i].Service %>','<%= dataCustomer[i].Distance %>', '<%= dataCustomer[i]._id %>', '<%= dataEmployee[0].IDEmployee %>')">รับงาน</button>
+
+                            <!-- Modal -->
+                            <div class="modal" id="modal-name">
+                                <div class="modal-sandbox"></div>
+                                <div class="modal-box">
+                                    <form action="" method="POST">
+                                        <div class="modal-header">
+                                            <div class="close-modal"></div>
+                                            <h1>ยืนยันการรับงาน</h1>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    ชื่อลูกค้า:
+                                                    <p id="Name_">
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    บริการ:
+                                                    <p id="Service_">
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    ระยะทาง:
+                                                    <p id="Distance_">
+                                                    </p>
+
+                                                </div>
+                                                <input type="hidden" name="IDCustomer_" id="IDCustomer_">
+                                                <input type="hidden" name="IDEmployee_" id="IDEmployee_">
+                                            </div>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                            <button type="button" class="btn btn-secondary close-modal">ปิด</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <% if (pages > 0) { %>
+                    <ul class="pagination w-25 mx-auto">
+                        <% if (current == 1) 
+                                    { %>
+                        <li class="page-item"><a class="page-link">First</a></li>
+                        <% }
+                                    else 
+                                    { %>
+                        <li><a class="page-link" href="/Driver/<%= idemployee %>/1">First</a></li>
+                        <% } %>
+
+                        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+
+                        <% if (i !== 1) { %>
+                        <li class="page-item"><a class="page-link">...</a></li>
+                        <% } %>
+
+                        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+
+                        <% if (i == current) { %>
+
+                        <li class="page-item active"><a class="page-link">
+                                <%= i %></a></li>
+                        <% } else { %>
+                        <li><a class="page-link" href="/Driver/<%= idemployee %>/<%= i %>">
+                                <%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                        <li class="page-item"><a class="page-link">...</a></li>
+                        <% } %>
+                        <% } %>
+                        <% if (current == pages) { %>
+                        <li class="page-item"><a class="page-link">Last</a></li>
+                        <% } else { %>
+                        <li><a class="page-link" href="/Driver/<%= idemployee %>/<%= pages %>">Last</a></li>
+                        <% } %>
+                    </ul>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <% include ../driver/partial/footer %>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+
+
+        $(".modal-trigger").click(function (e) {
+            e.preventDefault();
+            dataModal = $(this).attr("data-modal");
+            $("#" + dataModal).css({
+                "display": "block"
+            });
+
+        });
+
+
+
+        $(".close-modal, .modal-sandbox").click(function () {
+            $(".modal").css({
+                "display": "none"
+            });
+        });
+
+        function sendData(Name, Service, Distance, IDCustomer, IDEmployee) {
+            document.getElementById("Name_").innerHTML = Name
+            document.getElementById("Service_").innerHTML = Service
+            document.getElementById("Distance_").innerHTML = Distance
+            document.getElementById("IDCustomer_").defaultValue = IDCustomer
+            document.getElementById("IDEmployee_").defaultValue = IDEmployee
+
+
+
+        }
+    </script>
+</body>
+
+</html>
