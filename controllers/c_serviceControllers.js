@@ -42,6 +42,54 @@ app.get('/CScustomer/all/:page', function (req, res) {
     // });
 
 })
+
+app.post('/CScustomer/all/:page', function (req, res) {
+    var IDEmployee = req.body.IDEmployee_
+    var IDCustomer = req.body.IDCustomer_
+
+    var updateCustomer = {
+        Status: "ยกเลิกการสั่งงาน"
+    }
+    var updateEmployee = {
+        IDWork: "ว่าง",
+        StatusWork: "ว่าง"
+    }
+    Customer.find({
+        _id: IDCustomer
+    }, (err, docs) => {
+        if (!err) {
+
+            Customer.findOneAndUpdate({
+                _id: IDCustomer
+            }, updateCustomer, {
+                new: true
+            }, (err, doc) => {
+                if (!err) {
+                    Employee.findOneAndUpdate({
+                        IDEmployee: IDEmployee
+                    }, updateEmployee, {
+                        new: true
+                    }, (err, doc) => {
+                        if (!err) {
+                            res.redirect('/CScustomer/all/1')
+
+                        } else {
+
+                            console.log('Error during record update : ' + err);
+                        }
+                    });
+                } else {
+
+                    console.log('Error during record update : ' + err);
+                }
+            });
+
+        } else {
+            console.log('Error in retrieving employee list :' + err);
+        }
+    })
+
+})
 //รอดำเนินงาน waiting
 app.get('/CScustomer/waiting/:page', function (req, res) {
     var perPage = 5
@@ -69,6 +117,53 @@ app.get('/CScustomer/waiting/:page', function (req, res) {
 
             })
         })
+})
+app.post('/CScustomer/waiting/:page', function (req, res) {
+    var IDEmployee = req.body.IDEmployee_
+    var IDCustomer = req.body.IDCustomer_
+
+    var updateCustomer = {
+        Status: "ยกเลิกการสั่งงาน"
+    }
+    var updateEmployee = {
+        IDWork: "ว่าง",
+        StatusWork: "ว่าง"
+    }
+    Customer.find({
+        _id: IDCustomer
+    }, (err, docs) => {
+        if (!err) {
+
+            Customer.findOneAndUpdate({
+                _id: IDCustomer
+            }, updateCustomer, {
+                new: true
+            }, (err, doc) => {
+                if (!err) {
+                    Employee.findOneAndUpdate({
+                        IDEmployee: IDEmployee
+                    }, updateEmployee, {
+                        new: true
+                    }, (err, doc) => {
+                        if (!err) {
+                            res.redirect('/CScustomer/waiting/1')
+
+                        } else {
+
+                            console.log('Error during record update : ' + err);
+                        }
+                    });
+                } else {
+
+                    console.log('Error during record update : ' + err);
+                }
+            });
+
+        } else {
+            console.log('Error in retrieving employee list :' + err);
+        }
+    })
+
 })
 
 //กำลังดำเนินงาน working
@@ -98,6 +193,53 @@ app.get('/CScustomer/working/:page', function (req, res) {
 
             })
         })
+})
+app.post('/CScustomer/working/:page', function (req, res) {
+    var IDEmployee = req.body.IDEmployee_
+    var IDCustomer = req.body.IDCustomer_
+
+    var updateCustomer = {
+        Status: "ยกเลิกการสั่งงาน"
+    }
+    var updateEmployee = {
+        IDWork: "ว่าง",
+        StatusWork: "ว่าง"
+    }
+    Customer.find({
+        _id: IDCustomer
+    }, (err, docs) => {
+        if (!err) {
+
+            Customer.findOneAndUpdate({
+                _id: IDCustomer
+            }, updateCustomer, {
+                new: true
+            }, (err, doc) => {
+                if (!err) {
+                    Employee.findOneAndUpdate({
+                        IDEmployee: IDEmployee
+                    }, updateEmployee, {
+                        new: true
+                    }, (err, doc) => {
+                        if (!err) {
+                            res.redirect('/CScustomer/working/1')
+
+                        } else {
+
+                            console.log('Error during record update : ' + err);
+                        }
+                    });
+                } else {
+
+                    console.log('Error during record update : ' + err);
+                }
+            });
+
+        } else {
+            console.log('Error in retrieving employee list :' + err);
+        }
+    })
+
 })
 
 //เสร็จสิ้นการดำเนินงาน finish
@@ -160,53 +302,7 @@ app.get('/CScustomer/cancel/:page', function (req, res) {
 
 
 
-app.post('/CScustomer/:page', function (req, res) {
-    var IDEmployee = req.body.IDEmployee_
-    var IDCustomer = req.body.IDCustomer_
 
-    var updateCustomer = {
-        Status: "ยกเลิกการสั่งงาน"
-    }
-    var updateEmployee = {
-        IDWork: "ว่าง",
-        StatusWork: "ว่าง"
-    }
-    Customer.find({
-        _id: IDCustomer
-    }, (err, docs) => {
-        if (!err) {
-
-            Customer.findOneAndUpdate({
-                _id: IDCustomer
-            }, updateCustomer, {
-                new: true
-            }, (err, doc) => {
-                if (!err) {
-                    Employee.findOneAndUpdate({
-                        IDEmployee: IDEmployee
-                    }, updateEmployee, {
-                        new: true
-                    }, (err, doc) => {
-                        if (!err) {
-                            res.redirect('/CScustomer/1')
-
-                        } else {
-
-                            console.log('Error during record update : ' + err);
-                        }
-                    });
-                } else {
-
-                    console.log('Error during record update : ' + err);
-                }
-            });
-
-        } else {
-            console.log('Error in retrieving employee list :' + err);
-        }
-    })
-
-})
 
 
 

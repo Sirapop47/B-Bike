@@ -32,8 +32,8 @@ app.set('view engine', 'ejs')
 
 
 
-indexControllers(app)
 mapControllers(app);
+app.use(indexControllers);
 app.use(driverControllers);
 app.use(c_serviceControllers);
 app.use(customerControllers);

@@ -5,10 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/theme.css" type="text/css">
+  <link rel="stylesheet" href="css/collapsible-drawers.css" type="text/css">
+
+
+
   <title>BBike</title>
 </head>
 
 <body>
+
   <div class="py-5 align-items-center d-flex text-center filter-light section-parallax" style="background-image: url(&quot;image/bangkok.jpg&quot;); min-height: 100%;	">
     <div class="container py-5">
       <div class="row">
@@ -45,12 +50,12 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 col-6 p-4"> <img class="img-fluid d-block mb-3 mx-auto rounded" src="image/icon/shopping.png"
+        <div class="col-lg-6 col-12 p-4"> <img class="img-fluid d-block mb-3 mx-auto rounded" src="image/icon/shopping.png"
             width="100">
           <h4> <b>ฝากซื้อ ฝากส่ง</b></h4>
           <p class="mb-0"><i>"ถึงไว ทันใจ"</i></p>
         </div>
-        <div class="col-lg-6 col-6 p-4"> <img class="img-fluid d-block mb-3 mx-auto rounded" src="image/icon/shield.png"
+        <div class="col-lg-6 col-12 p-4"> <img class="img-fluid d-block mb-3 mx-auto rounded" src="image/icon/shield.png"
             width="100">
           <h4>ประกันระหว่างขนส่งสูงสุดถึง 2000 บาท</h4>
           <p class="mb-0"><i>"ปลอดภัย ไว้ใจได้"</i></p>
@@ -72,13 +77,14 @@
   <div class="py-3 text-center d-flex align-items-center" style="min-height: 60%;">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 col-6 p-3 px-2"> <img class="img-fluid d-block mx-auto" src="image/icon/map.png">
+        <div class="col-md-4 col-12 p-3 px-2"> <img class="img-fluid d-block mx-auto" src="image/icon/map.png">
           <h2 class="my-3">1. ระบุเส้นทางที่คุณต้องการ</h2>
           <p>ระบุเส้นทางที่คุณต้องการ ให้เราบริการ</p>
         </div>
-        <div class="col-md-4 col-6 p-3 px-2"> <img class="img-fluid d-block mx-auto" src="image/icon/choices.png">
+        <div class="col-md-4 col-12 p-3 px-2"> <img class="img-fluid d-block mx-auto" src="image/icon/choices.png">
           <h2 class="my-3"> <b>2. เลือกบริการ</b></h2>
           <p>เลือกบริการตามที่คุณต้องการ</p>
+          <p>(ส่งพัสดุ ส่งอาหาร เอกสารทั่วไป ฝากซื้อฝากส่ง)</p>
         </div>
         <div class="col-md-4 p-3 px-2"> <img class="img-fluid d-block mx-auto" src="image/icon/order.png">
           <h2 class="my-3"> <b>3. สรุปผลการสั่งงาน</b></h2>
@@ -90,12 +96,16 @@
       </div>
     </div>
   </div>
-  <div class="py-5 text-center" style="background-image: linear-gradient(to left bottom, rgba(189, 195, 199, .75), rgba(44, 62, 80, .75)); background-size: 100%;">
+  <div class="py-5 text-center" style="background-color: #243141; background-size: 100%;">
+    <!-- style="background-image: linear-gradient(to left bottom, rgba(189, 195, 199, .75), rgba(44, 62, 80, .75)); background-size: 100%;" -->
     <div class="container">
       <div class="row">
         <div class="mx-auto col-md-6">
-          <h1>Track & Tracep</h1>
-          <p class="">ติดตามการส่งของท่าน</p>
+          <div class="text-light">
+            <h1>Track & Tracep</h1>
+            <p class="">ติดตามการส่งของท่าน</p>
+          </div>
+
 
           <form class="form-inline d-flex justify-content-center" method="POST">
             <div class="input-group"> <input type="text" class="form-control" placeholder="รหัสในการบริการ" name="idTracking">
@@ -111,14 +121,14 @@
       </div>
     </div>
   </div>
-  <div class="py-5 text-center filter-light" >
-    <div class="container">
+  <div class="py-5 text-center filter-light section-parallax" style="background-image:url(image/cover.jpg);  background-position: center center, center center;  background-size: cover, cover;  background-repeat: repeat, repeat;">
+    <div class="container " style="background-image: linear-gradient(to bottom, rgba(36, 49, 65, 0.23), rgba(36, 49, 65, 0.62))">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mt-4">
           <h2 class="text-body">ค่าบริการพื้นฐาน </h2>
         </div>
       </div>
-      <div class="row">
+      <div class="row p-4">
         <div class="col-md-6 p-0">
           <div class="card py-2">
             <div class="card-body p-4">
@@ -140,19 +150,53 @@
       </div>
     </div>
   </div>
+  <div class="py-5" style="background-image: linear-gradient(to bottom, #f0f0f0, #ffffff); background-position:right center; background-size: cover;">
+    <div class="container">
+      <div class="row">
+        <div class="p-5 col-lg-12">
+          <h1>คำถามที่พบบ่อย</h1>
+          <hr>
+          <form>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="wrap">
+                  <div class="collapsible_drawers ">
+                    <p style="margin-bottom: 40px; font-size: 18px;"> สามารถขนส่งสินค้าได้ที่ไหนบ้าง?</p>
+                    <p>ปัจจุบัน BBike สามารถให้บริการขนส่งสินค้าในเขตกรุงเทพฯ และปริมณฑล</p>
+                  </div><br>
+                  <div class="collapsible_drawers ">
+                    <p style="margin-bottom: 40px; font-size: 18px;">สามารถใช้บริการ BBike ได้ในช่วงเวลาไหนบ้าง?</p>
+                    <p>BBike ให้บริการตลอดตั้งแต่เวลา 06.00 น. - 20.00 น.
+                      ให้คุณสามารถใช้บริการขนส่งตอนไหนก็ได้ตามความต้องการ</p>
+                  </div><br>
+                  <div class="collapsible_drawers ">
+                    <p style="margin-bottom: 40px; font-size: 18px;">BBike สามารถขนส่งสินค้าขนาดไหนได้บ้าง?</p>
+                    <p>สามารถขนส่งสินค้าขนาดไม่เกิน 20 กก. หรือ 50x50x80 ซม.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <div class="py-3 " style="background-color: #ffffff" id="contact">
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-3 text-light" style="background-color: #243141" id="contact">
     <div class="container">
       <div class="row">
 
         <div class="col-md-8 text-center mt-1">
-          <hr>
+          <hr style="background-color: #ffffff">
           <p>Bangkok, Thailand&nbsp;&nbsp;</p>
           <p>เบอร์โทรศัพท์ : 054-8475632</p>
           <p>Facebook : BBike</p>
           <p>Line : @BBike</p>
           <p class="mb-0"> <a href="mailto:info@bbink.com">info@bbink.com</a> </p>
-          <hr>
+          <hr style="background-color: #ffffff">
         </div>
         <div class="col-md-4">
           <h5 class="mb-3 pt-3 text-right">เข้าสู่ระบบสำหรับพนักงาน</h5>
@@ -181,6 +225,15 @@
             <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
           </a> </div>
       </div>
+      <!-- <div class="row">
+        <div class="col-md-12 text-center">
+          <p class="mb-0">© 2018 Bbike. All rights reserved</p>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <div class="py-2">
+    <div class="container">
       <div class="row">
         <div class="col-md-12 text-center">
           <p class="mb-0">© 2018 Bbike. All rights reserved</p>
@@ -193,7 +246,15 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+
   <script src="js/smooth-scroll.js"></script>
+
+  <script>
+    $('.collapsible_drawers').on('click', function (e) {
+      e.preventDefault();
+      $(this).toggleClass('active');
+    });
+  </script>
 </body>
 
 </html>
