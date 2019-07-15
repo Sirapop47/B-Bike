@@ -1,1 +1,2 @@
 # B-Bike
+npm install
