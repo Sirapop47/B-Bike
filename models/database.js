@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var url = "mongodb://mydb:aaa222@ds135844.mlab.com:35844/b-bike";
+var url = "mongodb://mydb:";
 
 
 
